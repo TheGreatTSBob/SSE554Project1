@@ -3,13 +3,12 @@ package banking;
 
 public abstract class Account {
 	
-	
 	protected double balance;
 	protected String holder;
 	protected String password;
 	protected double rate = .2;
 	
-	protected enum CompoundResult{
+	public enum CompoundResult{
 		NONE,
 		RATE,
 		PENALTY
@@ -22,7 +21,7 @@ public abstract class Account {
 		this.password = password;
 	}
 	
-	public void deposit(double amount, String password)
+	protected void deposit(double amount, String password)
 	{
 		if(!authenticate(password))
 			return;
@@ -31,9 +30,9 @@ public abstract class Account {
 			balance += amount;
 	}
 	
-	public abstract void withdraw(double amount, String password);
+	protected abstract void withdraw(double amount, String password);
 	
-	public Double getBalance(String password)
+	protected Double getBalance(String password)
 	{
 		if(authenticate(password))
 			return balance;
@@ -41,7 +40,7 @@ public abstract class Account {
 		return null;
 	}
 
-	public Boolean isOverdrawn(String password)
+	protected Boolean isOverdrawn(String password)
 	{
 		if(authenticate(password))
 			return balance < 0;
@@ -52,7 +51,7 @@ public abstract class Account {
 	protected abstract CompoundResult compoundInterest();
 	
 	
-	public Boolean authenticate(String password)
+	protected Boolean authenticate(String password)
 	{
 		if(this.password.compareTo(password) == 0)
 			return true;		

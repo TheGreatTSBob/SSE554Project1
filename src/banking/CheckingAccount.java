@@ -10,7 +10,7 @@ public class CheckingAccount extends Account {
 		rate = .1;
 	}
 	
-	public void withdraw(double amount, String password)
+	protected void withdraw(double amount, String password)
 	{
 		if(!authenticate(password))
 			return;
@@ -35,5 +35,10 @@ public class CheckingAccount extends Account {
 			balance -= 30;
 			return CompoundResult.PENALTY;
 		}
+	}
+	
+	public String toString()
+	{
+		return holder + " *Checking*"; 
 	}
 }

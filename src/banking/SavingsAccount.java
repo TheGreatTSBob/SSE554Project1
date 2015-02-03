@@ -11,7 +11,7 @@ public class SavingsAccount extends Account {
 	}
 	
 	
-	public void withdraw(double amount, String password)
+	protected void withdraw(double amount, String password)
 	{
 		
 		if(!authenticate(password))
@@ -21,11 +21,11 @@ public class SavingsAccount extends Account {
 		
 		if(currentWithdrawls >= maxWithdrawls)
 		{
+			//apply ten dollar fee
 			balance-=10;
 			return;
 		}
 
-		
 		if(amount > 0)
 			balance -= amount;
 	}
@@ -49,5 +49,10 @@ public class SavingsAccount extends Account {
 		this.currentWithdrawls = 0;
 		
 		return CompoundResult.NONE;
+	}
+	
+	public String toString()
+	{
+		return holder + " *Savings*"; 
 	}
 }
